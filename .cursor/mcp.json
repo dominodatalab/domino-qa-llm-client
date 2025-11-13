@@ -1,9 +1,0 @@
-{
-  "_comment": "Replace '/path/to/qa_mcp_server' with your actual path to the qa_mcp_server directory",
-  "mcpServers": {
-    "domino_qa_server": {
-      "command": "uv",
-      "args": ["--directory", "/path/to/qa_mcp_server", "run", "domino_qa_mcp_server.py"]
-    }
-  }
-} 
