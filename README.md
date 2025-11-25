@@ -4,39 +4,49 @@
 
 This client enables you to use AI assistants (like Claude, GPT-4, etc.) to perform comprehensive testing, validation, and performance analysis of your Domino Data Science Platform through natural language conversations.
 
-## 📋 **Quick Start**
+## 📋 **Quick Start (Start-to-Finish)**
 
-### **1. Prerequisites**
+### **1. Get the Required Repositories**
+1. **LLM Client (this project)** – clone the base workspace you will open in Cursor/Claude:
+   ```bash
+   git clone https://github.com/domino-field/domino-qa-llm-client.git
+   cd domino-qa-llm-client
+   ```
+   Open this folder in Cursor (preferred) or Claude Desktop so the assistant can read the files (e.g., use “Open Folder” in Cursor).
+2. **MCP Server** – clone the testing toolchain next to the client:
+   ```bash
+   git clone https://github.com/domino-field/qa_mcp_server.git
+   ```
+   You will run this repo locally so the client can talk to Domino via MCP.
+
+### **2. Prerequisites**
 - Python 3.11+
-- Access to a Domino Data Science Platform instance
+- Access to a Domino Data Science Platform instance with admin permissions
 - Domino API key
-- AI assistant with MCP support (Cursor, Claude Desktop, etc.)
+- AI assistant that supports MCP (Cursor, Claude Desktop, etc.)
 
-### **2. Install QA MCP Server**
+### **3. Install the QA MCP Server**
 
-First, set up the QA MCP Server that provides the testing tools:
+From the `qa_mcp_server` directory you cloned in step 1:
 
 ```bash
-# Clone or navigate to the qa_mcp_server directory
-# Replace /path/to/qa_mcp_server with your actual path
 cd /path/to/qa_mcp_server
-
-# Install dependencies
+uv venv
 uv pip install -e .
 ```
 
-### **3. Configure Environment**
+### **4. Configure the MCP Server Environment**
 
-Create a `.env` file in the qa_mcp_server directory:
+Create a `.env` file inside `qa_mcp_server`:
 ```dotenv
 DOMINO_API_KEY='your_api_key_here'
 DOMINO_HOST='https://your-domino-instance.com'
 ```
 
-### **4. Configure MCP in Your AI Client**
+### **5. Point Your AI Client to the MCP Server**
 
-#### **For Cursor IDE:**
-Create or update `.cursor/mcp.json` (replace `/path/to/qa_mcp_server` with your actual path):
+#### **Cursor IDE**
+Inside `domino-qa-llm-client`, update `.cursor/mcp.json` (replace `/path/to/qa_mcp_server` with the actual path):
 ```json
 {
   "mcpServers": {
@@ -48,8 +58,8 @@ Create or update `.cursor/mcp.json` (replace `/path/to/qa_mcp_server` with your 
 }
 ```
 
-#### **For Claude Desktop:**
-Add to your Claude Desktop config (replace `/path/to/qa_mcp_server` with your actual path):
+#### **Claude Desktop**
+Add to your Claude Desktop config:
 ```json
 {
   "mcpServers": {
@@ -61,12 +71,13 @@ Add to your Claude Desktop config (replace `/path/to/qa_mcp_server` with your ac
 }
 ```
 
-### **5. Verify Installation**
+### **6. Verify the Setup**
 
-Test the setup by asking your AI assistant:
+In Cursor or Claude (with the `domino-qa-llm-client` folder open), ask:
 ```
 "Test user authentication for user 'your_username' and project 'test_project'"
 ```
+If the assistant replies with Domino test results, everything is wired up correctly.
 
 ## What You Can Test
 
