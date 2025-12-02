@@ -9,13 +9,13 @@ This client enables you to use AI assistants (like Claude, GPT-4, etc.) to perfo
 ### **1. Get the Required Repositories**
 1. **LLM Client (this project)** – clone the base workspace you will open in Cursor/Claude:
    ```bash
-   git clone https://github.com/domino-field/domino-qa-llm-client.git
+   git clone https://github.com/dominodatalab/domino-qa-llm-client.git
    cd domino-qa-llm-client
    ```
    Open this folder in Cursor (preferred) or Claude Desktop so the assistant can read the files (e.g., use “Open Folder” in Cursor).
 2. **MCP Server** – clone the testing toolchain next to the client:
    ```bash
-   git clone https://github.com/domino-field/qa_mcp_server.git
+   git clone https://github.com/dominodatalab/qa_mcp_server.git
    ```
    You will run this repo locally so the client can talk to Domino via MCP.
 
@@ -23,7 +23,7 @@ This client enables you to use AI assistants (like Claude, GPT-4, etc.) to perfo
 - Python 3.11+
 - Access to a Domino Data Science Platform instance with admin permissions
 - Domino API key
-- AI assistant that supports MCP (Cursor, Claude Desktop, etc.)
+- AI assistant that supports MCP (Cursor, Claude Desktop, VSCode with Claude extension, etc.)
 
 ### **3. Install the QA MCP Server**
 
@@ -71,13 +71,43 @@ Add to your Claude Desktop config:
 }
 ```
 
+#### **VSCode (with Github Copilot)**
+Inside `domino-qa-llm-client`, create `.vscode/mcp.json` (replace `/path/to/qa_mcp_server` with the actual path):
+```json
+{
+  "inputs": [],
+  "servers": {
+    "domino_qa_server": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["--directory", "/path/to/qa_mcp_server", "run", "domino_qa_mcp_server.py"]
+    }
+  }
+}
+```
+
 ### **6. Verify the Setup**
 
-In Cursor or Claude (with the `domino-qa-llm-client` folder open), ask:
+In Cursor, Claude Desktop, or VSCode (with the `domino-qa-llm-client` folder open), ask:
 ```
-"Test user authentication for user 'your_username' and project 'test_project'"
+"Test user authentication for user 'integration-test' and project 'uat_test_project'"
 ```
 If the assistant replies with Domino test results, everything is wired up correctly.
+
+### **7. UAT Testing Rules & Workflow**
+
+This client includes comprehensive UAT testing rules to guide your AI assistant:
+- **`.github/instructions/uat-rules.instructions`** - VScode rules file
+- **`.cursor/rules/uat-rule.mdc`** - Cursor-specific rules file 
+
+The UAT rules file defines:
+- **End-to-End UAT Protocol**: Complete 14-test sequence that runs automatically
+- **Test Execution Rules**: Continuous execution without pausing between tests
+- **Mandatory Test Sequence**: All 14 tests from environment builds to admin portal validation
+- **Cleanup Procedures**: Automatic resource cleanup after test completion
+- **Safety Guidelines**: Protection against running tests in production environments
+
+**Your AI assistant will automatically follow these rules when you request UAT testing.**
 
 ## What You Can Test
 
@@ -120,9 +150,10 @@ If the assistant replies with Domino test results, everything is wired up correc
 
 ## Files Included
 
-- `llm-questions.md` - Example questions to ask your AI
-- `uat-rule.mdc` - Cursor rules for UAT testing workflow
-- `domino-settings.md` - Configuration parameters (if provided)
+- `llm-questions.md` - Example questions to ask your AI assistant
+- `.github/instructions/uat-rules.instructions` - UAT testing workflow rules for AI assistants
+- `.cursor/rules/uat-rule.mdc` - Cursor-specific rules file (legacy)
+- `domino_project_settings.md` - Project configuration parameters
 
 ## Test Coverage
 

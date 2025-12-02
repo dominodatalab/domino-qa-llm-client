@@ -1,0 +1,92 @@
+---
+description: Domino mcp uat server rules file
+apply: *
+---
+
+## Domino QA UAT - Lean Rules
+
+- Always read `domino_project_settings.md` for `USER_NAME`, `PROJECT_NAME`, or  the user will provide:
+- `user_name`: Domino username (must have admin access)
+- `project_name`: Test project name (e.g., "uat_test_project")
+
+## End-to-End UAT Protocol
+
+**MANDATORY: When user requests "end to end UAT" or "comprehensive UAT":**
+
+**CRITICAL REQUIREMENTS - DO NOT DEVIATE:**
+1. **MUST execute ALL 14 test functions in the exact sequence listed below**
+2. **MUST run continuously without stopping, pausing, or waiting for user feedback between tests**
+3. **MUST NOT ask for approval or confirmation before proceeding to the next test**
+4. **MUST complete all 14 tests before reporting final results**
+5. **MUST show progress immediately after each test completes**
+6. **MUST display operations from each test result**
+7. **MUST build summary table at the end after all 14 tests complete**
+
+**EXECUTION RULES:**
+- Start with test #1 and proceed sequentially through test #14
+- After each test completes, immediately proceed to the next test
+- Do NOT wait for user input between tests
+- Do NOT pause for confirmation
+- Do NOT stop after any test (even if it fails)
+- Continue automatically until all 14 tests are executed
+- Only after completing all 14 tests, run cleanup operations
+- Only after cleanup, provide the final summary
+
+**EXPLICIT PROHIBITIONS - DO NOT:**
+- ❌ DO NOT stop after test #4 or any other test number
+- ❌ DO NOT ask "Should I continue?" or "Proceed with next test?"
+- ❌ DO NOT wait for user approval between tests
+- ❌ DO NOT pause execution for any reason
+- ❌ DO NOT report "partial completion" - only report after ALL 14 tests
+- ❌ DO NOT skip any test in the sequence
+- ✅ DO execute all 14 tests automatically in one continuous run
+
+
+
+**MANDATORY TEST SEQUENCE - EXECUTE ALL 14 TESTS IN THIS EXACT ORDER:**
+
+**YOU MUST CALL ALL OF THESE FUNCTIONS IN SEQUENCE WITHOUT STOPPING:**
+
+1. `test_post_upgrade_env_rebuild` - Environment build
+2. `test_file_management_operations` - File operations
+3. `test_file_version_reversion` - File version reversion
+4. `test_project_copying` - Project copying
+5. `test_project_forking` - Project forking
+6. `test_advanced_job_operations` - Job operations
+7. `test_job_scheduling` - Job scheduling
+8. `test_comprehensive_ide_workspace_suite` - Workspace IDEs
+9. `test_workspace_file_sync` - Workspace file sync
+10. `test_workspace_hardware_tiers` - Hardware tiers
+11. `enhanced_test_dataset_operations` - Dataset operations
+12. `test_model_api_publish` - Model API publish
+13. `test_app_publish` - App publish
+14. `run_admin_portal_uat_suite` - Admin portal
+
+**AFTER ALL 14 TESTS COMPLETE, THEN:**
+- Run `cleanup_all_project_workspaces(user_name, project_name)`
+- Run `cleanup_all_project_datasets(user_name, project_name)`
+- Generate final summary table
+
+**Progress format:**
+```
+Test X/14: Test Name — ✅ PASSED
+   Operation: ✅ PASSED
+```
+
+## Workspace Testing
+- List which IDEs are being tested
+- Test at least 2 different IDEs
+- Stop and delete all workspaces after testing
+
+## Cleanup
+**MANDATORY: Always run cleanup AFTER all 14 tests complete (not during or between tests):**
+```
+cleanup_all_project_workspaces(user_name, project_name)
+cleanup_all_project_datasets(user_name, project_name)
+```
+**Note:** Cleanup happens ONLY after test #14 completes, not before or during the test sequence.
+
+## Safety
+- Never run UAT in production projects
+- Use test project names only (e.g., "uat_test_project")
+- User must have admin permissions
