@@ -283,7 +283,7 @@ MCP prompts are pre-configured workflows that guide GitHub Copilot through struc
 Use the quick_auth_test prompt with my credentials from @domino_project_settings.md
 ```
 
-**Full End-to-End UAT (14 tests in 5 phases):**
+**Full End-to-End UAT (14 sequential tests with automatic cleanup):**
 ```
 Execute the end_to_end_uat_protocol using settings from @domino_project_settings.md
 ```
@@ -353,12 +353,24 @@ Open `llm-questions.md` in your workspace to see:
 
 #### **Prompt 2: `end_to_end_uat_protocol`**
 - **Purpose:** Comprehensive 14-test UAT suite with strict continuous execution
-- **Test Phases:**
-  1. **Core Functionality** (4 tests): auth, projects, jobs, workspaces
-  2. **Data & Environment** (3 tests): environments, datasets, enhanced datasets
-  3. **Advanced Features** (3 tests): file mgmt, collaboration, models
-  4. **Enhanced Testing** (2 tests): enhanced models, advanced jobs
-  5. **Comprehensive Suites** (2 tests): admin suite, user suite
+- **Mandatory Test Sequence (Execute in this exact order):**
+  1. **test_post_upgrade_env_rebuild** - Environment build validation
+  2. **test_file_management_operations** - File operations (upload, download, move, rename)
+  3. **test_file_version_reversion** - File version control and reversion
+  4. **test_project_copying** - Project copying functionality
+  5. **test_project_forking** - Project forking functionality
+  6. **test_advanced_job_operations** - Advanced job operations
+  7. **test_job_scheduling** - Job scheduling workflows
+  8. **test_comprehensive_ide_workspace_suite** - All workspace IDEs (Jupyter, RStudio, VSCode)
+  9. **test_workspace_file_sync** - Workspace file synchronization
+  10. **test_workspace_hardware_tiers** - Hardware tier validation (small-k8s, medium-k8s, large-k8s)
+  11. **enhanced_test_dataset_operations** - Enhanced dataset operations
+  12. **test_model_api_publish** - Model API publishing
+  13. **test_app_publish** - Application publishing
+  14. **run_admin_portal_uat_suite** - Admin portal comprehensive validation
+- **Cleanup Phase (Executes after Test 14):**
+  - `cleanup_all_project_workspaces` - Removes all test workspaces
+  - `cleanup_all_project_datasets` - Removes all test datasets
 - **Execution Rules:**
   - Continuous execution (no pauses between tests)
   - No user confirmation requests
