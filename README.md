@@ -6,7 +6,29 @@ This client enables you to use AI assistants (like Claude, GPT-4, etc.) to perfo
 
 The client connects to an MCP server that exposes **32 specialized tools** and **2 standardized prompts** for intelligent platform assessment, automated UAT workflows, and data-driven performance analysis.
 
-## 📋 **Quick Start (Start-to-Finish)**
+---
+
+## 🚀 **Choose Your Deployment Method**
+
+There are **two ways** to use this QA MCP client:
+
+### **Option 1: Run from Your Laptop/Client (Local Setup)**
+Connect to Domino from your local machine using Cursor, Claude Desktop, or VSCode.
+- ✅ Best for: Local development and testing
+- ✅ Requires: Manual MCP server installation on your machine
+- ✅ Follow this guide below (Quick Start section)
+
+### **Option 2: Run Inside Domino Workspace (Recommended)**
+Run the MCP server directly inside a Domino VS Code workspace with GitHub Copilot.
+- ✅ Best for: Team collaboration and centralized testing
+- ✅ Requires: Pre-built Domino environment (`quay.io/domino/field:qa_mcp_server`)
+- ✅ **Follow this guide:** [README-Domino-Workspace.md](./README-Domino-Workspace.md)
+
+**💡 Tip:** If you're working in Domino workspaces with your team, use **Option 2** for zero local setup and automatic credential management.
+
+---
+
+## 📋 **Quick Start (Option 1: Local Setup)**
 
 ### **1. Get the Required Repositories**
 1. **LLM Client (this project)** – clone the base workspace you will open in Cursor/Claude:

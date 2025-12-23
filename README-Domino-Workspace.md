@@ -10,12 +10,12 @@ This guide explains how to use the QA MCP Server within Domino Data Science Plat
 
 Instead of running the MCP server locally on your machine, you can deploy it **inside a Domino workspace** using a custom compute environment. This approach:
 
-✅ Eliminates local installation requirements 
-✅ Provides immediate access to testing tools within Domino 
-✅ Auto-configures GitHub Copilot Chat with MCP server
-✅ Ensures consistent environment across your team
-✅ Runs testing from inside the Domino platform itself
-✅ Uses workspace credentials automatically (no manual API key configuration)
+✅ Eliminates local installation requirements  
+✅ Provides immediate access to testing tools within Domino  
+✅ Auto-configures GitHub Copilot Chat with MCP server  
+✅ Ensures consistent environment across your team  
+✅ Runs testing from inside the Domino platform itself  
+✅ Uses workspace credentials automatically (no manual API key configuration)  
 
 ---
 
@@ -494,13 +494,13 @@ Open `llm-questions.md` in your workspace to see:
 
 ### Advantages
 
-✅ **Zero local setup** - Just launch workspace
-✅ **Pre-built environment** - Use `quay.io/domino/field:qa_mcp_server`
-✅ **Auto-credentials** - Uses workspace API key automatically
-✅ **Team consistency** - Everyone uses same environment
-✅ **Inside the platform** - Direct access to Domino internals
-✅ **GitHub Copilot integrated** - Ready to use after GitHub login
-✅ **Version control** - Git-based project with all instructions
+✅ **Zero local setup** - Just launch workspace  
+✅ **Pre-built environment** - Use `quay.io/domino/field:qa_mcp_server`  
+✅ **Auto-credentials** - Uses workspace API key automatically  
+✅ **Team consistency** - Everyone uses same environment  
+✅ **Inside the platform** - Direct access to Domino internals  
+✅ **GitHub Copilot integrated** - Ready to use after GitHub login  
+✅ **Version control** - Git-based project with all instructions  
 
 ---
 
