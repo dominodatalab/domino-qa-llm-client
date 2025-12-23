@@ -2,7 +2,7 @@
 
 **AI-Powered Testing Directly Inside Domino Workspaces with GitHub Copilot**
 
-This guide explains how to use the QA MCP Server within Domino Data Science Platform workspaces using a pre-configured compute environment. This method eliminates local setup and provides immediate access to all 32 MCP tools and 2 prompts directly in your Domino VS Code workspace.
+This guide explains how to use the QA MCP Server within Domino Data Science Platform workspaces using a pre-configured compute environment. This method eliminates local setup and provides immediate access to all 24 MCP tools and 2 prompts directly in your Domino VS Code workspace.
 
 ---
 
@@ -320,29 +320,36 @@ Open `llm-questions.md` in your workspace to see:
 
 ## MCP Tools & Prompts Available
 
-### 32 MCP Tools (5 Categories)
+### 24 MCP Tools (5 Categories)
 
 **Core Job Execution (4 tools):**
 - `run_domino_job`, `check_domino_job_run_status`, `check_domino_job_run_results`, `open_web_browser`
 
-**UAT Testing Suite (12 tools):**
-- `test_user_authentication`, `test_project_operations`, `test_job_execution`
-- `test_workspace_operations`, `test_environment_operations`, `test_dataset_operations`
-- `test_file_management_operations`, `test_collaboration_features`, `test_model_operations`
-- `enhanced_test_dataset_operations`, `enhanced_test_model_operations`, `enhanced_test_advanced_job_operations`
+**End-to-End UAT Suite (14 tools):**
+These are the 14 tests executed in the `end_to_end_uat_protocol`:
+1. `test_post_upgrade_env_rebuild` - Environment build validation
+2. `test_file_management_operations` - File operations
+3. `test_file_version_reversion` - File version reversion
+4. `test_project_copying` - Project copying
+5. `test_project_forking` - Project forking
+6. `test_advanced_job_operations` - Job operations
+7. `test_job_scheduling` - Job scheduling
+8. `test_comprehensive_ide_workspace_suite` - Workspace IDEs
+9. `test_workspace_file_sync` - Workspace file sync
+10. `test_workspace_hardware_tiers` - Hardware tiers
+11. `enhanced_test_dataset_operations` - Dataset operations
+12. `test_model_api_publish` - Model API publish
+13. `test_app_publish` - App publish
+14. `run_admin_portal_uat_suite` - Admin portal
 
-**Performance Testing (5 tools):**
-- `performance_test_workspaces`, `performance_test_jobs`, `stress_test_api`
-- `performance_test_concurrent_jobs`, `performance_test_data_upload_throughput`
+**Performance Testing (3 tools):**
+- `performance_test_concurrent_jobs`, `performance_test_data_upload_throughput`, `performance_test_parallel_workspaces`
 
-**Comprehensive Suites (6 tools):**
-- `run_master_comprehensive_uat_suite`, `run_comprehensive_advanced_uat_suite`
-- `run_admin_uat_suite`, `run_user_uat_suite`, `run_comprehensive_split_uat_suite`
-- `cleanup_test_resources`
+**Cleanup Tools (2 tools):**
+- `cleanup_all_project_workspaces`, `cleanup_all_project_datasets`
 
-**Platform Management (5 tools):**
-- `create_project_if_needed`, `test_dataset_creation_and_upload`
-- `test_environment_and_hardware_operations`, `test_advanced_job_operations`, `enhanced_test_file_management`
+**Authentication (1 tool):**
+- `test_user_authentication`
 
 ### 2 MCP Prompts (Standardized Workflows)
 
