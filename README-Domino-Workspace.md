@@ -83,6 +83,42 @@ When you launch a VS Code workspace in this environment:
    - **Name:** "QA MCP Server Environment" (or your preferred name)
    - **Base Image:** `quay.io/domino/field:qa_mcp_server`
    - **Visibility:** Choose appropriate visibility (e.g., "Global" or "Organization")
+   - **Pluggable Workspace Tools:** Add the following workspace configurations:
+   ```yaml
+   jupyter:
+     title: "Jupyter (Python, R, Julia)"
+     iconUrl: "/assets/images/workspace-logos/Jupyter.svg"
+     start: [ "/opt/domino/workspaces/jupyter/start" ]
+     supportedFileExtensions: [ ".ipynb" ]
+     httpProxy:
+       port: 8888
+       rewrite: false
+       internalPath: "/{{ownerUsername}}/{{projectName}}/{{sessionPathComponent}}/{{runId}}/{{#if pathToOpen}}tree/{{pathToOpen}}{{/if}}"
+       requireSubdomain: false
+   jupyterlab:
+     title: "JupyterLab"
+     iconUrl: "/assets/images/workspace-logos/jupyterlab.svg"
+     start: [  "/opt/domino/workspaces/jupyterlab/start" ]
+     httpProxy:
+       internalPath: "/{{ownerUsername}}/{{projectName}}/{{sessionPathComponent}}/{{runId}}/{{#if pathToOpen}}tree/{{pathToOpen}}{{/if}}"
+       port: 8888
+       rewrite: false
+       requireSubdomain: false
+   vscode:
+     title: "vscode"
+     iconUrl: "/assets/images/workspace-logos/vscode.svg"
+     start: [ "/opt/domino/workspaces/vscode/start" ]
+     httpProxy:
+       port: 8888
+       requireSubdomain: false
+   rstudio:
+     title: "RStudio"
+     iconUrl: "/assets/images/workspace-logos/Rstudio.svg"
+     start: [ "/opt/domino/workspaces/rstudio/start" ]
+     httpProxy:
+       port: 8888
+       requireSubdomain: false
+   ```
 4. Click **"Build"** or **"Create"**
 5. Wait for the environment to build (usually 5-15 minutes)
 6. Verify the environment shows as **"Ready"** or **"Active"**
@@ -173,6 +209,8 @@ Once the VS Code workspace opens in your browser:
 1. In VS Code, look for the **chat icon** in the left sidebar (usually looks like a speech bubble)
 2. Click to open **GitHub Copilot Chat**
 3. The chat panel will open on the right side of VS Code
+
+**⚠️ Important:** Make sure GitHub Copilot Chat is in **"Agent mode"** (not "Ask mode"). Agent mode allows Copilot to execute MCP tools and prompts. You should see an option to switch modes in the chat interface.
 
 ---
 
